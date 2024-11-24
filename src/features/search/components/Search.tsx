@@ -8,14 +8,13 @@ import { SearchInput } from "./search-input/SearchInput";
 type TSearchProps = {
   className?: string;
 };
+
 export function Search({ className }: TSearchProps) {
   // hooks
   const navigate = useNavigate();
 
   // state
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
-  const [hasInputBeenFocused, setHasInputBeenFocused] = useState(false);
-  const [filtersManuallyClosed, setFiltersManuallyClosed] = useState(false);
   const [search, setSearch] = useState<TSearchState>({
     query: "",
     filters: {
@@ -32,15 +31,10 @@ export function Search({ className }: TSearchProps) {
   // methods
   const handleCloseFilters = () => {
     setIsFiltersOpen(false);
-    setFiltersManuallyClosed(true);
   };
 
   const handleInputFocus = () => {
-    if (!hasInputBeenFocused || filtersManuallyClosed) {
-      setIsFiltersOpen(true);
-      setHasInputBeenFocused(true);
-      setFiltersManuallyClosed(false);
-    }
+    setIsFiltersOpen(true); // Open full-screen filters
   };
 
   const handleSearchChange = (query: string) => {
@@ -76,19 +70,32 @@ export function Search({ className }: TSearchProps) {
     }
 
     navigate(`/search?${urlSearchParams.toString()}`);
+    setIsFiltersOpen(false); // Close filters after submission
   };
 
   return (
-    <div className={cn(className, "")}>
-      <SearchInput
-        ref={searchFieldRef}
-        onFocus={handleInputFocus}
-        onChange={handleSearchChange}
-        onSubmit={handleSearchSubmit}
-        isFiltersOpen={isFiltersOpen}
-      />
+      <div className={cn(className, "relative")}>
+        {/* Search Input */}
+        <SearchInput
+            ref={searchFieldRef}
+            onFocus={handleInputFocus}
+            onChange={handleSearchChange}
+            onSubmit={handleSearchSubmit}
+            isFiltersOpen={isFiltersOpen}
+        />
 
-      {isFiltersOpen && <Filters onClose={handleCloseFilters} onChange={handleFiltersChange} />}
-    </div>
+        {/* Full-Screen Filters Overlay */}
+        {isFiltersOpen && (
+            <div className="fixed inset-0 bg-black/70 z-40 flex flex-col items-center justify-center">
+              <Filters onClose={handleCloseFilters} onChange={handleFiltersChange} />
+              <button
+                  onClick={handleCloseFilters}
+                  className="absolute top-4 right-4 bg-white text-black rounded-full p-2 shadow-md"
+              >
+                Close
+              </button>
+            </div>
+        )}
+      </div>
   );
 }
