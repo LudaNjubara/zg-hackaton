@@ -1,10 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { dateToMillis } from "@/utils";
-import { DateRange } from "react-day-picker";
 import { TFilterType, TPriceFilterItem } from "../../types";
 import { CategoryFilter } from "./CategoryFilter";
-import { DateFilter } from "./DateFilter";
 import { PriceFilter } from "./PriceFilter";
 
 type FiltersProps = {
@@ -15,13 +12,13 @@ type FiltersProps = {
 
 export function Filters({ className, onClose, onChange }: FiltersProps) {
   // handlers
-  const handleDateFilterClick = (dateItem: DateRange | undefined) => {
+  /*  const handleDateFilterClick = (dateItem: DateRange | undefined) => {
     const fromDateMillis = dateItem?.from ? dateToMillis(dateItem.from) : "";
     const toDateMillis = dateItem?.to ? dateToMillis(dateItem.to) : "";
 
     onChange("fromDate", `${fromDateMillis}`);
     onChange("toDate", `${toDateMillis}`);
-  };
+  }; */
 
   const handlePriceFilterClick = (priceItem: TPriceFilterItem) => {
     onChange("price", priceItem.value);
@@ -48,7 +45,7 @@ export function Filters({ className, onClose, onChange }: FiltersProps) {
       </div>
 
       <ul className="space-y-4">
-        <DateFilter onChange={handleDateFilterClick} />
+        {/* <DateFilter onChange={handleDateFilterClick} /> */}
         <PriceFilter onClick={handlePriceFilterClick} />
         <CategoryFilter onClick={handleCategoryFilterClick} />
       </ul>
