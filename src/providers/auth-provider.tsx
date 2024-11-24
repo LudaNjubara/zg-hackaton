@@ -1,11 +1,17 @@
 /* eslint-disable react-refresh/only-export-components */
 import { logout } from "@/api/auth";
-import { fetchUserInfo } from "@/api/user";
+import { fetchGuestInfo } from "@/api/user"; //fetchUserInfo
 import { login } from "@/features/login";
 import { register } from "@/features/register";
 import { TLoginRequest, TRegisterRequest, TUser } from "@/types";
 import { validateToken } from "@/utils/auth-utils";
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 type TAuthContext = {
@@ -69,21 +75,24 @@ export const AuthProvider: React.FC<TAuthProviderProps> = ({ children }) => {
    *
    * Method that registers the user.
    * **/
-  const _register = useCallback(async (creds: TRegisterRequest): Promise<void> => {
-    const { jwtToken, user } = await register(creds);
-    const { roles, email, firstName, id, lastName, username } = user;
+  const _register = useCallback(
+    async (creds: TRegisterRequest): Promise<void> => {
+      const { jwtToken, user } = await register(creds);
+      const { roles, email, firstName, id, lastName, username } = user;
 
-    setIsAuthenticated(true);
-    setUser({
-      id,
-      roles,
-      email,
-      username,
-      lastName,
-      firstName,
-    });
-    localStorage.setItem("jwtToken", jwtToken);
-  }, []);
+      setIsAuthenticated(true);
+      setUser({
+        id,
+        roles,
+        email,
+        username,
+        lastName,
+        firstName,
+      });
+      localStorage.setItem("jwtToken", jwtToken);
+    },
+    []
+  );
 
   /**
    *
@@ -103,7 +112,7 @@ export const AuthProvider: React.FC<TAuthProviderProps> = ({ children }) => {
    *
    * Method that fetches the user info.
    * **/
-  const _getUserInfo = useCallback(async () => {
+  /*const _getUserInfo = useCallback(async () => {
     const data = await fetchUserInfo();
     setUser({
       id: data.id,
@@ -115,6 +124,22 @@ export const AuthProvider: React.FC<TAuthProviderProps> = ({ children }) => {
     });
     setIsAuthenticated(true);
   }, []);
+  */
+
+  const _getGuestInfo = useCallback(async () => {
+    const data = await fetchGuestInfo();
+    localStorage.setItem("jwtToken", data.jwtToken);
+    setUser({
+      id: data.user.id,
+      email: data.user.email,
+      username: data.user.username,
+      roles: data.user.roles,
+      firstName: data.user.firstName,
+      lastName: data.user.lastName,
+    });
+
+    setIsAuthenticated(true);
+  }, []);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -124,25 +149,21 @@ export const AuthProvider: React.FC<TAuthProviderProps> = ({ children }) => {
           console.log("User is already authenticated");
           return;
         } else {
-          console.log("User is not authenticated");
+          await _getGuestInfo();
           const token = localStorage.getItem("jwtToken");
-          const { isValid, decodedToken } = validateToken(token);
-
-          if (!isValid || !decodedToken) throw new Error("Invalid token");
-
-          await _getUserInfo();
+          const { isValid } = validateToken(token);
+          if (!isValid) throw new Error("Invalid token");
         }
       } catch (error) {
         if (error instanceof Error) {
           console.error(error.message);
         }
-
         await _logout();
       }
     };
 
     checkAuth();
-  }, [_logout, _getUserInfo, isAuthenticated]);
+  }, [_logout, _getGuestInfo, isAuthenticated]);
 
   return (
     <AuthContext.Provider

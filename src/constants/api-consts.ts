@@ -30,6 +30,7 @@ export const API_ENDPOINTS = {
     CREATE: `${APP_BACKEND_URL}/user/create`,
     UPDATE: `${APP_BACKEND_URL}/user/update`,
     DELETE: `${APP_BACKEND_URL}/user/delete`,
-    FAVORITES: `${APP_BACKEND_URL}/user/favorites`,
+    FAVORITES: `${APP_BACKEND_URL}/users/favorites`,
+    TESTUSER : `${APP_BACKEND_URL}/users/generate-test-user`
   },
 } as const;

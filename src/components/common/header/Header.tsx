@@ -99,16 +99,17 @@ export function Header({ className }: TSidebarProps) {
         id: "Profile",
         icon: <UserIcon size={16} />,
         allowedRoles: ["ROLE_USER"],
-        isPublic: false,
-        onClick: () => openSidebar(),
+        isPublic: true,
+        href: '/guestpage', 
+        //onClick: () => openSidebar(),
       },
-      {
+      /*{
         id: "Login",
         title: "",
         href: "/login",
         icon: <UserIcon size={16} />,
         isPublic: true,
-      }
+      }*/
     ],
     [openSidebar]
   );
