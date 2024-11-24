@@ -7,7 +7,8 @@ export function SearchResultsSection() {
   const { data: events, isLoading, refetch: refetchEvents } = useSearchEvents();
 
   return (
-    <section>
+    <section className="px-10 py-24">
+      <h1 className="font-semibold text-2xl pb-2">Search Results</h1>
       {isLoading && (
         <GridView>
           {Array.from({ length: 4 }).map((_, index) => (

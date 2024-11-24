@@ -20,12 +20,12 @@ type TEventCardProps = {
 };
 
 export function EventCard({ event }: TEventCardProps) {
-    const navigate = useNavigate();
-    const handleSave = () => {
-        console.log(`Event ${event.id} saved.`);
-    };
+  const navigate = useNavigate();
+  const handleSave = () => {
+    console.log(`Event ${event.id} saved.`);
+  };
 
-    const { bookmarks, addBookmark, removeBookmark } = useBookmarks();
+  const { bookmarks, addBookmark, removeBookmark } = useBookmarks();
 
   const handleBookmark = (event: Event) => {
     if (bookmarks.some((bookmarkedEvent) => bookmarkedEvent.id === event.id)) {
@@ -35,16 +35,18 @@ export function EventCard({ event }: TEventCardProps) {
     }
   };
 
-    const handleGoToEventDetails =()=>{
-        console.log(event);
-        navigate(`/event/${event.id}`, { state: event });
+  const handleGoToEventDetails = () => {
+    console.log(event);
+    navigate(`/event/${event.id}`, { state: event });
+  };
 
-    }
-
-    return (
-        <div className="max-w-sm bg-white rounded-lg shadow-md overflow-hidden relative" onClick={()=>handleGoToEventDetails()}>
-            {/* Save Button */}
-            <button
+  return (
+    <div
+      className="max-w-sm bg-white rounded-lg shadow-md overflow-hidden relative"
+      onClick={() => handleGoToEventDetails()}
+    >
+      {/* Save Button */}
+      <button
         onClick={() => handleBookmark(event)}
         className="absolute top-2 right-2 bg-background p-2 rounded-full shadow hover:bg-gray-100"
         aria-label="Save Event"
@@ -61,7 +63,9 @@ export function EventCard({ event }: TEventCardProps) {
 
       {/* Event Image */}
       <img
-        src={event.eventImageUrl || "https://via.placeholder.com/400x200"}
+        src={
+          "https://v5.airtableusercontent.com/v3/u/35/35/1732449600000/tFA-Md7bTewWN6bp55EQYQ/LndRQcLnM_Vo8PyCpmc105VSJiLm1iy8nGBs3DzEJOAoLmgGQl6eQiKFub6POuiG-f7lv2OYtivwN5D9qG5dLtF1mM_kU3WuY5q6qtMGl9f0q3Zim6XGvy1PhBMipCf_chEfLomE-Mu4RPDCuWKSfg/K0VNywUek1WWEUwi9hfgcA1cg4EiJ8mxCWZfy8NKUcA"
+        }
         alt={event.shortName}
         className="w-full h-48 object-cover"
       />
