@@ -23,7 +23,9 @@ const BookmarksContext = createContext<BookmarksContextType | undefined>(
   undefined
 );
 
-export const BookmarksProvider: React.FC = ({ children }) => {
+export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [bookmarks, setBookmarks] = useState<Event[]>(() => {
     const storedBookmarks = localStorage.getItem("bookmarks");
     return storedBookmarks ? JSON.parse(storedBookmarks) : [];
