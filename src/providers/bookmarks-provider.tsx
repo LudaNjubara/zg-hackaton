@@ -2,10 +2,14 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 
 type Event = {
   id: number;
-  eventImageUrl: string | null;
+  eventImageUrl: string;
   shortName: string;
+  longName: string;
   startDate: string | null;
-  location: string | null;
+  endDate: string | null;
+  location: string | null; // Ensure location has lat and lng
+  description: string;
+  eventCategories: string[] | null;
   eventTypes: string[];
 };
 
