@@ -6,11 +6,15 @@ import { useBookmarks } from "@/providers/bookmarks-provider";
 
 type Event = {
   id: number;
-  eventImageUrl: string | null; // Image URL or placeholder
-  shortName: string; // Event name
-  startDate: string | null; // Start date
-  location: string | null; // Event location
-  eventTypes: string[]; // Event tags
+  eventImageUrl: string;
+  shortName: string;
+  longName: string;
+  startDate: string | null;
+  endDate: string | null;
+  location: string | null; // Ensure location has lat and lng
+  description: string;
+  eventCategories: string[] | null;
+  eventTypes: string[];
 };
 
 export const EventScrollFeed: React.FC = () => {
