@@ -2,7 +2,7 @@ import { ErrorHandler } from "@/components/error";
 import { AppLayout } from "@/components/layout";
 import { Toaster } from "@/components/ui/toaster";
 import { EventScrollFeed } from "@/features/tiktokFeed/Feed.tsx";
-import { AdminPage, HomePage, LoginPage, Page404, ProfilePage, RegisterPage, SearchPage } from "@/pages";
+import { AdminPage, GuestPage, HomePage, LoginPage, Page404, ProfilePage, RegisterPage, SearchPage } from "@/pages";
 import { ProtectedRoute } from "@/routes";
 import {
   createBrowserRouter,
@@ -24,6 +24,8 @@ const router = createBrowserRouter(
       <Route path="/event/:id" element={<EventPage />} />
       <Route path="/search" element={<SearchPage />} />
       <Route path="/feed/" element={<EventScrollFeed />} />
+      <Route path="/guestpage" element={<GuestPage />} />
+
 
       {/* Protected routes */}
       <Route
