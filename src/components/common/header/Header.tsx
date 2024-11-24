@@ -83,7 +83,7 @@ export function Header({ className }: TSidebarProps) {
       { 
         id: "Home",
         title: "",
-        href: '/' ,
+        href: '/feed' ,
         icon: <HomeIcon size={16} />,
         isPublic: true 
         },
@@ -91,7 +91,7 @@ export function Header({ className }: TSidebarProps) {
       { 
         id: "StandardHome",
         title: "", 
-        href: '/', 
+        href: '/search',
         icon: <SearchIcon size={16} />, 
         isPublic: true,
       },
