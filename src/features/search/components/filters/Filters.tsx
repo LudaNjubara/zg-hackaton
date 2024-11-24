@@ -4,7 +4,7 @@ import { dateToMillis } from "@/utils";
 import { DateRange } from "react-day-picker";
 import { TFilterType, TPriceFilterItem } from "../../types";
 import { CategoryFilter } from "./CategoryFilter";
-import { DateFilter } from "./DateFilter";
+/*import { DateFilter } from "./DateFilter";*/
 import { PriceFilter } from "./PriceFilter";
 
 type FiltersProps = {
@@ -48,7 +48,7 @@ export function Filters({ className, onClose, onChange }: FiltersProps) {
       </div>
 
       <ul className="space-y-4">
-        <DateFilter onChange={handleDateFilterClick} />
+        {/* <DateFilter onChange={handleDateFilterClick} /> */}
         <PriceFilter onClick={handlePriceFilterClick} />
         <CategoryFilter onClick={handleCategoryFilterClick} />
       </ul>
