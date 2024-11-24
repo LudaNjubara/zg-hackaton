@@ -9,9 +9,10 @@ export const API_ENDPOINTS = {
     TEST: `${APP_BACKEND_URL}/example/test-authenticated`,
   },
   EVENT: {
+    GET_EVENTS: `${APP_BACKEND_URL}/events`,
     RECENTLY_VIEWED: {
       GET: `${APP_BACKEND_URL}/events/recently-viewed`,
-      GET_ALL: `${APP_BACKEND_URL}/events/recently-viewed/all`,
+      GET_ALL: `${APP_BACKEND_URL}/events/recently-viewed/all`
     },
     FAVORITES: {
       GET: `${APP_BACKEND_URL}/events/favorites`,
