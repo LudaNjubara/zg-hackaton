@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { FaBookmark, FaShareAlt } from "react-icons/fa";
-import { Header } from "@/components/common/header/Header.tsx"; // Import the Header component
+import { Header } from "@/components/common/header/Header.tsx";
+import {API_ENDPOINTS} from "@/constants"; // Import the Header component
 
 type Event = {
     id: number;
@@ -22,7 +23,7 @@ export const EventScrollFeed: React.FC = () => {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const response = await fetch("https://zg-hackathon-backend.onrender.com/events");
+                const response = await fetch(API_ENDPOINTS.EVENT.GET_EVENTS);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
