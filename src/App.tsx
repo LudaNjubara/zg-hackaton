@@ -2,7 +2,16 @@ import { ErrorHandler } from "@/components/error";
 import { AppLayout } from "@/components/layout";
 import { Toaster } from "@/components/ui/toaster";
 import { EventScrollFeed } from "@/features/tiktokFeed/Feed.tsx";
-import { AdminPage, GuestPage, HomePage, LoginPage, Page404, ProfilePage, RegisterPage, SearchPage } from "@/pages";
+import {
+  AdminPage,
+  GuestPage,
+  HomePage,
+  LoginPage,
+  Page404,
+  ProfilePage,
+  RegisterPage,
+  SearchPage,
+} from "@/pages";
 import { ProtectedRoute } from "@/routes";
 import {
   createBrowserRouter,
@@ -12,6 +21,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { EventPage } from "./pages/event/EventPage";
+import { FavouritesPage } from "./pages/favourites/FavouritesPage";
 
 //ypp
 const router = createBrowserRouter(
@@ -25,7 +35,7 @@ const router = createBrowserRouter(
       <Route path="/search" element={<SearchPage />} />
       <Route path="/feed/" element={<EventScrollFeed />} />
       <Route path="/guestpage" element={<GuestPage />} />
-
+      <Route path="/favourites" element={<FavouritesPage />} />
 
       {/* Protected routes */}
       <Route

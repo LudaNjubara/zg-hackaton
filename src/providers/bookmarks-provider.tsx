@@ -2,10 +2,14 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 
 type Event = {
   id: number;
-  eventImageUrl: string | null;
+  eventImageUrl: string;
   shortName: string;
+  longName: string;
   startDate: string | null;
-  location: string | null;
+  endDate: string | null;
+  location: string | null; // Ensure location has lat and lng
+  description: string;
+  eventCategories: string[] | null;
   eventTypes: string[];
 };
 
@@ -19,7 +23,9 @@ const BookmarksContext = createContext<BookmarksContextType | undefined>(
   undefined
 );
 
-export const BookmarksProvider: React.FC = ({ children }) => {
+export const BookmarksProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [bookmarks, setBookmarks] = useState<Event[]>(() => {
     const storedBookmarks = localStorage.getItem("bookmarks");
     return storedBookmarks ? JSON.parse(storedBookmarks) : [];
