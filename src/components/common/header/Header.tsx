@@ -127,16 +127,18 @@ export function Header({ className }: TSidebarProps) {
         return `flex items-center gap-2 px-4 py-2 text-sm font-medium text-black rounded-md hover:bg-primary-darker`;
   }
 
+  /*
+  <Logo>
+            <Link to="/" className="px-4 py-2 text-lg text-">
+              App
+            </Link>
+          </Logo> */
 
   return (
     <>
       <header className={cn(className, "z-40")}>
         <nav className="flex justify-between gap-3">
-          <Logo>
-            <Link to="/" className="px-4 py-2 text-lg text-">
-              App
-            </Link>
-          </Logo>
+          
 
             <ul className="flex justify-center gap-2 fixed bottom-4 left-1/2 transform -translate-x-1/2 align-center z-40 bg-white/60 backdrop-blur-lg p-4 rounded-lg shadow-lg border border-white/30">
 
