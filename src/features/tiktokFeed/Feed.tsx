@@ -3,6 +3,8 @@ import { FaBookmark, FaShareAlt } from "react-icons/fa";
 import { Header } from "@/components/common/header/Header.tsx";
 import { API_ENDPOINTS } from "@/constants"; // Import the Header component
 import { useBookmarks } from "@/providers/bookmarks-provider";
+import event_image_1 from "@/assets/images/1.jpeg";
+import event_image_2 from "@/assets/images/2.jpeg";
 
 type Event = {
   id: number;
@@ -92,13 +94,15 @@ export const EventScrollFeed: React.FC = () => {
       >
         {/* Event Feed */}
         <div>
-          {filteredEvents.map((event) => (
+          {filteredEvents.map((event, idx) => (
             <div
               key={event.id}
               className="h-screen flex flex-col justify-end snap-start relative bg-black"
               style={{
                 backgroundImage: `url(${
-                  event.eventImageUrl || "https://via.placeholder.com/1080x1920"
+                  idx % 2 === 0
+                    ? "https://v5.airtableusercontent.com/v3/u/35/35/1732449600000/22P6I1wcpuzqtCgx2nno3g/3Wjb14Oyn0GHIR7e3S7De4y7eEq4iW8GlkCiStBiicjUWji3ppPMk8ubSAURjPdWXfVDSg1N0NlRyWEFYXVZX5YQiLqLCT7-5ciPCIcdD6Ve56YK1j_eK_4oX4paCHYSOta2_PmbP9MCNhmbH6yXkg/g7cmaEuE5C_2vj_UBEIvyT0NqCet1FGvpCXWWF5g8Kw"
+                    : "https://v5.airtableusercontent.com/v3/u/35/35/1732449600000/tFA-Md7bTewWN6bp55EQYQ/LndRQcLnM_Vo8PyCpmc105VSJiLm1iy8nGBs3DzEJOAoLmgGQl6eQiKFub6POuiG-f7lv2OYtivwN5D9qG5dLtF1mM_kU3WuY5q6qtMGl9f0q3Zim6XGvy1PhBMipCf_chEfLomE-Mu4RPDCuWKSfg/K0VNywUek1WWEUwi9hfgcA1cg4EiJ8mxCWZfy8NKUcA"
                 })`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
