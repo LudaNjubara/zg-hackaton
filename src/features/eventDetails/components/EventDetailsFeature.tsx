@@ -1,6 +1,7 @@
 import React from "react";
 import { Map } from "@/features/map";
 import { useLocation } from "react-router-dom";
+import { Header } from "@/components/common/header/Header";
 
 type Event = {
     id: number;
@@ -98,7 +99,12 @@ export const EventDetailsFeature: React.FC = () => {
                         </div>
                     </div>
                 ) : (
-                    <p className="text-sm text-gray-500">Location not available.</p>
+                    <div className="mb-6">
+                    <h3 className="font-semibold text-lg mb-2">Lokacija</h3>
+                    <div className="mt-4">
+                        <Map eventLocation={{ lat: 45.80953904272471, lng: 15.970095117395742,}} /> {/* Pass lat/lng object */}
+                    </div>
+                    </div>
                 )}
 
                 {/* Description */}
@@ -107,6 +113,7 @@ export const EventDetailsFeature: React.FC = () => {
                     <p className="text-gray-600 whitespace-pre-line">{event.description || "No description available."}</p>
                 </div>
             </div>
+            <Header/>
         </div>
     );
 };

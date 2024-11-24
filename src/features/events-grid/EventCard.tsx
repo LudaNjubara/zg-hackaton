@@ -1,3 +1,5 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useBookmarks } from "@/providers/bookmarks-provider";
 import { FaBookmark } from "react-icons/fa";
 
@@ -18,7 +20,12 @@ type TEventCardProps = {
 };
 
 export function EventCard({ event }: TEventCardProps) {
-  const { bookmarks, addBookmark, removeBookmark } = useBookmarks();
+    const navigate = useNavigate();
+    const handleSave = () => {
+        console.log(`Event ${event.id} saved.`);
+    };
+
+    const { bookmarks, addBookmark, removeBookmark } = useBookmarks();
 
   const handleBookmark = (event: Event) => {
     if (bookmarks.some((bookmarkedEvent) => bookmarkedEvent.id === event.id)) {
@@ -28,10 +35,16 @@ export function EventCard({ event }: TEventCardProps) {
     }
   };
 
-  return (
-    <div className="max-w-sm bg-white rounded-lg shadow-md overflow-hidden relative">
-      {/* Save Button */}
-      <button
+    const handleGoToEventDetails =()=>{
+        console.log(event);
+        navigate(`/event/${event.id}`, { state: event });
+
+    }
+
+    return (
+        <div className="max-w-sm bg-white rounded-lg shadow-md overflow-hidden relative" onClick={()=>handleGoToEventDetails()}>
+            {/* Save Button */}
+            <button
         onClick={() => handleBookmark(event)}
         className="absolute top-2 right-2 bg-background p-2 rounded-full shadow hover:bg-gray-100"
         aria-label="Save Event"
